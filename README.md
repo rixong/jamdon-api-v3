@@ -15,3 +15,5 @@ Jamdom uses:
 ## Included models
 
 Users - {email, password, firstname, lastname, instruments, genres}
+
+jamdon-api-v3

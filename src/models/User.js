@@ -26,12 +26,12 @@ const User = mongoose.model('User', {
       }
     }
   },
-  firstName: {
+  firstname: {
     type: String,
     require: true,
     trim: true
   },
-  lastName: {
+  lastname: {
     type: String,
     require: true,
     trim: true
@@ -48,15 +48,5 @@ const User = mongoose.model('User', {
   }
 })
 
-const me = new User(
-  {
-    firstName: 234,
-    lastName: 'Tatum',
-    password: 'word',
-    email: 'efrDasdfSF@gmail.com',
-    instruments: ['drums', 'piano', 'vibes'],
-    genres: ['rock', 'jazz']
-  }
-)
 
 module.exports = User

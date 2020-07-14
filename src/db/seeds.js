@@ -8,7 +8,7 @@ const users = [
     genres: ['rock', 'jazz']
   },
   {
-    n: 'Bob',
+    firstname: 'Bob',
     lastname: 'Bishop',
     email: 'bob@gmail.com',
     password: '1234',

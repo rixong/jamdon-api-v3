@@ -21,7 +21,5 @@ const myFunction = async () => {
   const hashedPassword = await bcrypt.hash(password, 8)
 console.log('hashed - ',hashedPassword)
 const isValid = await bcrypt.compare('passWord', hashedPassword);
-console.log(valid)
 
 } 
-myFunction();

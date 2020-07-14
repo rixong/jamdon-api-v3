@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = new express.Router;
-const User = require('../models/User')
+const User = require('../models/user')
 
 router.post('/users', async (req, res) => {
   const user = new User(req.body)
@@ -39,10 +39,10 @@ router.get('/users/:id', async (req, res) => {
 })
 
 router.patch('/users/:id', async (req, res) => {
-  const updates = Object.keys(req.params)
+  const updates = Object.keys(req.body)
   const allowedUpdates = ['email', 'password', 'firstname', 'lastname', 'instruments', 'genres']
   const isVaildOperation = updates.every(update => allowedUpdates.includes(update))
-  console.log(isVaildOperation)
+  console.log(updates)
   if (!isVaildOperation) {
     return res.status(400).send({ error: 'Invalid updates!' })
   }

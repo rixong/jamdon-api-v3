@@ -16,7 +16,7 @@ MongoClient.connect(connectionURL, {
   const db = client.db(databaseName)
 
   const seedUsers = () => {
-    seeds.users.forEach(async(user) => {
+    seeds.users.forEach(async (user) => {
       user.password = await bcrypt.hash(user.password, 8);
       db.collection('users').insertOne(user, (error, result) => {
         // console.log(result)

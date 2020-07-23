@@ -1,3 +1,4 @@
 node_modules
 extras
 .DS_Store
+config/dev.env

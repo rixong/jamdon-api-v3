@@ -6,12 +6,14 @@ const jamSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  ensemble: {
+  groupType: {
     type: String,
     required: true
   },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now,
+    required: true
   },
   location: {
     type: String
@@ -24,4 +26,6 @@ const jamSchema = new mongoose.Schema({
   }
 });
 
-const Jams = mongoose.model('Jams', jamSchema)
+const Jam = mongoose.model('Jams', jamSchema)
+
+module.exports = Jam

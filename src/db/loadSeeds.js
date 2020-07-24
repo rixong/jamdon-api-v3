@@ -24,6 +24,11 @@ MongoClient.connect(connectionURL, {
     })
   }
 
+  const seedJams = () => {
+      db.collection('jams').insertMany(seeds.jams);
+  }
+
   seedUsers();
+  seedJams();
 
 })

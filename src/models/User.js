@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Jam = require('./jam');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -92,6 +93,12 @@ userSchema.methods.generateAuthToken = async function () {
   await user.save();
   return token;
 }
+
+userSchema.virtual('jams', {
+  ref: Jam,
+  localField: '_id',
+  foreignField: 'host'
+})
 
 
 const User = mongoose.model('User', userSchema)

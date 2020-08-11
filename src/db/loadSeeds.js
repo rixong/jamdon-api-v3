@@ -29,6 +29,6 @@ MongoClient.connect(connectionURL, {
   }
 
   seedUsers();
-  seedJams();
+  // seedJams();
 
 })

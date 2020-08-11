@@ -2,6 +2,7 @@
 const express = require('express');
 const router = new express.Router;
 const User = require('../models/user');
+// const Jam = require('../models/jam')
 const auth = require('../middleware/auth');
 
 //CREATE USER
@@ -56,7 +57,9 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 
 // GET CURRENT USER
 router.get('/users/me', auth, async (req, res) => {
-  res.send(req.user)
+  await req.user.populate('jams').execPopulate();
+  console.log(req.user.jams)
+  res.send(req.user.jams)
 })
 
 //GET ALL USERS

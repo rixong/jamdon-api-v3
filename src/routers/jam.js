@@ -1,11 +1,16 @@
 const express = require('express');
 const router = new express.Router;
 const Jam = require('../models/jam');
+const auth = require('../middleware/auth')
 
 //CREATE JAM
-router.post('/jams', async (req, res) => {
-  console.log(req.body)
-  const jam = new Jam(req.body)
+router.post('/jams', auth, async (req, res) => {
+  console.log(req.user._id)
+  const jam = new Jam({
+    ...req.body,
+    host: req.user._id
+  })
+
   try {
     await jam.save()
     res.send(jam)
@@ -15,20 +20,35 @@ router.post('/jams', async (req, res) => {
   }
 })
 
+//GET JAM BY ID
+router.get('/jams/:id', async (req, res) => {
+  const jam = await Jam.findById(req.params.id);
+  await jam.populate('host').execPopulate();
+  console.log(jam)
+  res.send(jam);
+})
+
 //UPDATE JAM
 router.patch('/jams/:id', async (req, res) => {
 
   const allowedUpdates = ['name', 'groupType', 'date', 'location', 'musicians', 'instruments']
   const updates = Object.keys(req.body);
   const isValidField = updates.every(update => allowedUpdates.includes(update));
-console.log('Valid', isValidField)
   const jam = await Jam.findById(req.params.id);
-  console.log(jam);
+  if (!jam) {
+    return res.status(403).send();
+  }
+  if (!isValidField) {
+    return res.status(400).send({ error: 'Invalid update' });
+  }
+  
   try {
+    updates.forEach(update => jam[update] = req.body[update]);
+    await jam.save();
     res.send(jam)
   }
-  catch{
-
+  catch (e) {
+    res.status(400).send(e);
   }
 })
 
@@ -38,7 +58,8 @@ router.get('/jams', async (req, res) => {
   console.log('Here')
   try {
     const jams = await Jam.find({});
-    res.send(jams);
+    await
+      res.send(jams);
   }
   catch (e) {
     res.status(500).send();

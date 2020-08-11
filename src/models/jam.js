@@ -21,9 +21,17 @@ const jamSchema = new mongoose.Schema({
   instruments: {
     type: Array
   },
-  musicians: {
-    type: Array
+  host: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
+  // ,
+  // guests: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }]
+
 });
 
 const Jam = mongoose.model('Jams', jamSchema)

@@ -55,9 +55,8 @@ router.patch('/jams/:id', async (req, res) => {
 
 // GET ALL JAMS 
 router.get('/jams', async (req, res) => {
-  console.log('Here')
   try {
-    const jams = await Jam.find({});
+    const jams = await Jam.find(req.body);
     await
       res.send(jams);
   }

@@ -20,7 +20,7 @@
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.23",
     "nodemon": "^2.0.4",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0"
